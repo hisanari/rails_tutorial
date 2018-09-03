@@ -1,0 +1,1 @@
+{"version":3,"file":"application-4271047a89e7e06425bc96b178667065.css","sources":["webpack:///./app/javascript/stylesheets/application.scss"],"sourcesContent":["body {\n    background-color: aqua;\n}\n\n\n// WEBPACK FOOTER //\n// ./app/javascript/stylesheets/application.scss"],"mappings":"AAAA;AACA;","sourceRoot":""}
