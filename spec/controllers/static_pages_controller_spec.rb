@@ -28,5 +28,13 @@ RSpec.describe StaticPagesController, type: :controller do
       expect(response).to have_http_status(:success)
       assert_select "title", "About | #{base_title}"
     end
-  end  
+  end
+  
+  describe 'GET #Contact' do
+    it 'returns http success' do
+      get :contact
+      expect(response).to have_http_status(:success)
+      assert_select "title", "Contact | #{base_title}"
+    end
+  end
 end
