@@ -1,6 +1,7 @@
 {
-  "application.css": "/packs/application-d41d8cd98f00b204e9800998ecf8427e.css",
-  "application.css.map": "/packs/application-d41d8cd98f00b204e9800998ecf8427e.css.map",
-  "application.js": "/packs/application-594c8529317ac27d7c88.js",
-  "application.js.map": "/packs/application-594c8529317ac27d7c88.js.map"
+  "application.css": "/packs/application-5efded8ead6c3b647da2e9fc50a3d81f.css",
+  "application.css.map": "/packs/application-5efded8ead6c3b647da2e9fc50a3d81f.css.map",
+  "application.js": "/packs/application-6395210302d6c0851d87.js",
+  "application.js.map": "/packs/application-6395210302d6c0851d87.js.map",
+  "images/rails.png": "/packs/images/rails-8e7886c2d44de9794b9b02b7742231a0.png"
 }

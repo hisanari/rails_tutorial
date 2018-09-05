@@ -33,6 +33,7 @@ group :development, :test do
   # Rspec
   gem 'rspec-rails'
   gem 'factory_bot'
+  gem 'rails-controller-testing'
 end
 
 group :development do
