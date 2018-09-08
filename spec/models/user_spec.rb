@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'new' do
     let(:user) { User.new(params) }
-    let(:params) { {name: "test", email: "test@example.com"} }
+    let(:params) { {name: "test", email: "test@example.com",
+                     password: "foobar", password_confirmation: "foobar"} }
     context '有効な場合' do
       it '有効' do
         expect(user.valid?).to eq(true)
@@ -53,6 +54,14 @@ RSpec.describe User, type: :model do
         dup_user.email.upcase!
         user.save
         expect(dup_user.valid?).to eq(false)
+      end
+      it 'パスワードが入力されていない' do
+				user.password = user.password_confirmation = " " * 6 
+				expect(user.valid?).to be_falsey
+      end
+      it 'パスワードが短い' do
+	      user.password = user.password_confirmation = "a" * 5
+	      expect(user.valid?).to be_falsey
       end
     end
   end
