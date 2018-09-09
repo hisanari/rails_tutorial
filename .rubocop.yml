@@ -1,0 +1,40 @@
+# Railsモード
+Rails:
+  Enable: true
+
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# モジュール名::クラス名の定義を許可
+ClassAndModuleChildren:
+  Enabled: false
+
+# privateメソッドはインデント深くする
+Style/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: rails
+
+# foo {} OK foo{} NG
+Style/SpaceBeforeBlockBraces:
+  Enabled: true
+
+# Use `foo { bar }` not `foo {bar}`.
+Style/SpaceInsideBlockBraces:
+  Enabled: true
+
+# Use `{ a: 1 }` not `{a:1}`.
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: true
+
+Style/EndOfLine:
+  EnforcedStyle: lf
+
+Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+style/EmptyMethod:
+  EnforcedStyle: expanded
