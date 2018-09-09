@@ -2,23 +2,23 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'new' do
-    let(:user) { User.new(params) }
-    let(:params) { {name: "test", email: "test@example.com",
-                     password: "foobar", password_confirmation: "foobar"} }
+    let(:user) { FactoryBot.attributes_for(:user) }
     context '有効な場合' do
       it '有効' do
         expect(user.valid?).to eq(true)
-      end      
+      end
       it '正しいメールフォーマット' do
-        valid_mails = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
-          first.last@foo.jp alice+bob@baz.cn]
-        valid_mails.each do | mail |
+        valid_mails = %w[
+          user@example.com USER@foo.COM A_US-ER@foo.bar.org
+          first.last@foo.jp alice+bob@baz.cn
+        ]
+        valid_mails.each do |mail|
           user.email = mail
           expect(user.valid?).to eq(true)
         end
       end
       it 'メールアドレスは小文字で保存されている' do
-        mix_case_mail = "Foo@ExAMPle.CoM"
+        mix_case_mail = 'Foo@ExAMPle.CoM'
         user.email = mix_case_mail
         user.save
         expect(mix_case_mail.downcase).to eq(user.reload.email)
@@ -34,20 +34,22 @@ RSpec.describe User, type: :model do
         expect(user.valid?).to eq(false)
       end
       it '名前が長すぎる' do
-        user.name = "a" * 51
+        user.name = 'a' * 51
         expect(user.valid?).to eq(false)
       end
       it 'アドレスが長すぎる' do
-        user.email = "a" * 244 + "@example.com"
+        user.email = 'a' * 244 + '@example.com'
         expect(user.valid?).to eq(false)
       end
       it '正しくないメールフォーマット' do
-        invalid_mails = %w[user@example,com user_at_foo.org user.name@example.
-          foo@bar_baz.com foo@bar+baz.com test@bar..com]
-        invalid_mails.each do | mail |
+        invalid_mails = %w[
+          user@example,com user_at_foo.org user.name@example.
+          foo@bar_baz.com foo@bar+baz.com test@bar..com
+        ]
+        invalid_mails.each do |mail|
           user.email = mail
-          expect(user.valid?).to eq(false), "#{mail}"
-         end
+          expect(user.valid?).to eq(false), mail.to_s
+        end
       end
       it 'ユニークなアドレスではない' do
         dup_user = user.dup
@@ -56,12 +58,12 @@ RSpec.describe User, type: :model do
         expect(dup_user.valid?).to eq(false)
       end
       it 'パスワードが入力されていない' do
-				user.password = user.password_confirmation = " " * 6 
-				expect(user.valid?).to be_falsey
+        user.password = user.password_confirmation = ' ' * 6
+        expect(user.valid?).to be_falsey
       end
       it 'パスワードが短い' do
-	      user.password = user.password_confirmation = "a" * 5
-	      expect(user.valid?).to be_falsey
+        user.password = user.password_confirmation = 'a' * 5
+        expect(user.valid?).to be_falsey
       end
     end
   end
