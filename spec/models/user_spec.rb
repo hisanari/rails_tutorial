@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'new' do
-    let(:user) { FactoryBot.attributes_for(:user) }
+    let(:user) { FactoryBot.build(:user) }
     context '有効な場合' do
       it '有効' do
         expect(user.valid?).to eq(true)
