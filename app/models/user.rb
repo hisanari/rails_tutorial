@@ -12,8 +12,14 @@ class User < ApplicationRecord
     length: { maximum: 255 },
     format: { with: VALID_EMAIL_REGEX },
     uniqueness: { case_sensitive: false }
-	# パスワードを安全に保存するために必要なものを使用できるようになる
-  has_secure_password
-	# パスワードの存在性、長さのバリデーション
-	validates :password, presence: true, length: { minimum: 6 }
+    # パスワードを安全に保存するために必要なものを使用できるようになる
+    has_secure_password
+    # パスワードの存在性、長さのバリデーション
+    validates :password, presence: true, length: { minimum: 6 }
+
+    # 文字列のハッシュを返す
+    def User.digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
 end

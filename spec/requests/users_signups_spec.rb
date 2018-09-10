@@ -4,6 +4,7 @@ RSpec.describe 'UsersSignups', type: :request do
   describe 'POST /users_signups' do
     subject { post users_path, params: { user: user } }
     describe '成功したとき' do
+      include SessionsHelper
       # 正しいユーザー
       let(:user) { FactoryBot.attributes_for(:user) }
       it 'ユーザーが追加されている' do
@@ -17,6 +18,11 @@ RSpec.describe 'UsersSignups', type: :request do
       it 'flashが表示されている' do
         subject
         expect(flash[:success]).to_not be_empty
+      end
+      it 'ログイン状態になっている' do
+        subject
+        follow_redirect!
+        expect(logged_in?).to be_truthy
       end
     end
     describe '失敗したとき' do

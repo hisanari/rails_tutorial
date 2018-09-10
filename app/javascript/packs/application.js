@@ -8,7 +8,11 @@
 // layout file, like app/views/layouts/application.html.erb
 import '../stylesheets/application';
 import 'bootstrap/dist/js/bootstrap';
+import Rails from 'rails-ujs';
 
+// rails-ujsのため
+Rails.start();
+// 画像読み込むため
 require.context('../images', true, /\.(png|jpg|jpeg|svg)$/);
 
 console.log('Hello World from Webpacker');
