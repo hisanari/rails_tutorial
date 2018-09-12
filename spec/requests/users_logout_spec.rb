@@ -19,8 +19,14 @@ RSpec.describe 'ログアウト', type: :request do
       follow_redirect!
       # セッションとクッキーが削除されたことを確認しログアウトの確認とした。
       expect(session['user_id']).to be_falsey
-      expect(@response.cookies.signed['remember_token']).to be_falsey
+      expect(@response.cookies['remember_token']).to be_falsey
       expect(@response.cookies['user_id']).to be_falsey
+    end
+    it 'ログアウトを複数要求する' do
+      subject
+      follow_redirect!
+      subject
+      expect(response).to render_template('static_pages/home')
     end
     it 'ヘッダーのリンクが変更されている' do
       subject
