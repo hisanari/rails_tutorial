@@ -17,7 +17,16 @@ RSpec.describe 'ログアウト', type: :request do
     it 'ログイン状態ではない' do
       subject
       follow_redirect!
-      expect(logged_in?).to be_falsey
+      # セッションとクッキーが削除されたことを確認しログアウトの確認とした。
+      expect(session['user_id']).to be_falsey
+      expect(@response.cookies['remember_token']).to be_falsey
+      expect(@response.cookies['user_id']).to be_falsey
+    end
+    it 'ログアウトを複数要求する' do
+      subject
+      follow_redirect!
+      subject
+      expect(response).to render_template('static_pages/home')
     end
     it 'ヘッダーのリンクが変更されている' do
       subject

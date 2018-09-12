@@ -23,6 +23,9 @@ RSpec.describe User, type: :model do
         user.save
         expect(mix_case_mail.downcase).to eq(user.reload.email)
       end
+      it 'authenticated?はユーザの持つダイジェストがnilの場合、falseを返す' do
+        expect(user.authenticated?('')).to be_falsey
+      end
     end
     context '無効な場合' do
       it '名前がない' do

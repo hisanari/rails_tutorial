@@ -6,7 +6,7 @@ RSpec.describe 'ログイン', type: :request do
   end
   subject { post login_path, params: { session: user_info } }
   describe '有効な場合' do
-    let(:user_info) { { email: @user.email, password: @user.password } }
+    let(:user_info) { { email: @user.email, password: @user.password, remember_me: '1' } }
     context '正しいログイン情報の場合' do
       it '正しくリダイレクトされている' do
         subject
@@ -23,6 +23,15 @@ RSpec.describe 'ログイン', type: :request do
         expect(response.body).to_not include login_path
         expect(response.body).to include logout_path
         expect(response.body).to include user_path(@user)
+      end
+      it 'rememberを使用できる' do
+        subject
+        expect(@response.cookies['remember_token']).to be_truthy
+      end
+      it 'rememberのチェックが入っていないときはクッキーを削除' do
+        user_info[:remember_me] = '0'
+        subject
+        expect(@response.cookies['remember_me']).to be_falsey
       end
     end
   end
