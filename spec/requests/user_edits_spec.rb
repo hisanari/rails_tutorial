@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe "UserEdits", type: :request do
   before do
     @user = FactoryBot.create(:user)
+    @other = FactoryBot.create(:other)
   end
+  # ログイン情報
+  let(:user_info) { { email: @user.email, password: @user.password } }
 
   describe 'ログインしていないとき' do
     it 'editにアクセスするとリダイレクト' do
@@ -18,10 +21,14 @@ RSpec.describe "UserEdits", type: :request do
       follow_redirect!
       expect(response.body).to include 'alert alert-danger'
     end
+    it 'フレンドリーフォワーディングが有効' do
+      get edit_user_path(@user)
+      post login_path, params: { session: user_info }
+      expect(response).to redirect_to edit_user_path(@user)
+    end
   end
 
   describe 'ログインしている時' do
-    let(:user_info) { { email: @user.email, password: @user.password } }
     subject { patch user_path(@user), params: { user: update_user } }
 
     before do
@@ -32,6 +39,18 @@ RSpec.describe "UserEdits", type: :request do
       it 'users/editが表示されている' do
         get edit_user_path(@user)
         expect(response).to render_template('users/edit')
+      end
+      it '他のユーザーのeditページが閲覧できない' do
+        get edit_user_path(@other)
+        expect(response.body).to redirect_to root_path
+        follow_redirect!
+        expect(response.body).to_not include 'alert alert-danger'
+      end
+      it '他のユーザーのupdateできない' do
+        patch user_path(@other), params: { user: user_info }
+        expect(response.body).to redirect_to root_path
+        follow_redirect!
+        expect(response.body).to_not include 'alert alert-danger'
       end
     end
 
