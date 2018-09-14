@@ -11,23 +11,23 @@ ClassAndModuleChildren:
   Enabled: false
 
 # privateメソッドはインデント深くする
-Style/IndentationConsistency:
+Layout/IndentationConsistency:
   Enabled: true
   EnforcedStyle: rails
 
 # foo {} OK foo{} NG
-Style/SpaceBeforeBlockBraces:
+Layout/SpaceBeforeBlockBraces:
   Enabled: true
 
 # Use `foo { bar }` not `foo {bar}`.
-Style/SpaceInsideBlockBraces:
+Layout/SpaceInsideBlockBraces:
   Enabled: true
 
 # Use `{ a: 1 }` not `{a:1}`.
-Style/SpaceInsideHashLiteralBraces:
+Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
 
-Style/EndOfLine:
+Layout/EndOfLine:
   EnforcedStyle: lf
 
 Documentation:
@@ -36,5 +36,5 @@ Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-style/EmptyMethod:
+Style/EmptyMethod:
   EnforcedStyle: expanded
