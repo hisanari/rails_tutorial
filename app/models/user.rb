@@ -16,7 +16,7 @@ class User < ApplicationRecord
   # パスワードを安全に保存するために必要なものを使用できるようになる
   has_secure_password
   # パスワードの存在性、長さのバリデーション
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # 文字列のハッシュを返す
   def self.digest(string)
