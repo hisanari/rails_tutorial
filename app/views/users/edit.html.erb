@@ -1,36 +1,9 @@
 <% provide(:title, "Edit user") %>
+<% provide(:button_text, "変更を保存する")%>
 <h2>プロフィール編集</h2>
-
 <div class="row">
   <div class="col-md-6 offset-md-3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
-
-      <div class="form-group">
-      <%= f.label :name, "名前" %>
-      <%= f.text_field :name, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-      <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-      <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-      <%= f.label :password_confirmation, "パスワードの確認" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-      </div> 
-
-      <div class="form-group">
-      <%= f.submit "変更を保存する", class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-
+    <%= render 'form' %>
     <div class="gravatar_edit">
       <%= gravatar_for @user %>
       <a href="http://gravatar.com/emails" target="_blank">変更</a>
