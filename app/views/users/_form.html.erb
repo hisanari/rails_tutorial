@@ -1,0 +1,27 @@
+<%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', object: @user %>
+
+  <div class="form-group">
+  <%= f.label :name, "名前" %>
+  <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :email, "メールアドレス" %>
+  <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :password, "パスワード" %>
+  <%= f.password_field :password, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :password_confirmation, "パスワードの確認" %>
+  <%= f.password_field :password_confirmation, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block"%>
+  </div>
+<% end %>

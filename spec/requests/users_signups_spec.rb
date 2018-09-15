@@ -39,7 +39,7 @@ RSpec.describe 'UsersSignups', type: :request do
         subject
         expect(response.body).to include 'error_explanation'
         expect(response.body).to include 'field_with_errors'
-        expect(response.body).to include 'action="/signup"'
+        expect(response.body).to include 'action="/users"'
       end
     end
   end
