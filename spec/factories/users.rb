@@ -5,6 +5,7 @@ FactoryBot.define do
     password { 'foobar' }
     password_confirmation { 'foobar' }
     remember_digest { '' }
+    admin { true }
   end
   factory :other, class: User do
     name { 'other' }

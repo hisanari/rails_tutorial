@@ -30,6 +30,8 @@ RSpec.describe "UserEdits", type: :request do
 
   describe 'ログインしている時' do
     subject { patch user_path(@user), params: { user: update_user } }
+    
+    let(:update_user) { FactoryBot.attributes_for(:user, admin: true ) }
 
     before do
       post login_path, params: { session: user_info }
@@ -51,6 +53,11 @@ RSpec.describe "UserEdits", type: :request do
         expect(response.body).to redirect_to root_path
         follow_redirect!
         expect(response.body).to_not include 'alert alert-danger'
+      end
+      it 'adminはweb経由で変更できない' do
+        expect(@user.admin?).to be_falsey
+        subject
+        expect(@user.admin?).to be_falsey
       end
     end
 
