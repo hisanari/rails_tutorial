@@ -13,4 +13,11 @@ FactoryBot.define do
     password_confirmation { 'hogehoge' }
     remember_digest { '' }
   end
+  factory :anonymous, class: User do
+    name Faker::Name.name
+    sequence(:email) { |n| "anonymous-#{n}@example.com" }
+    password { 'password' }
+    password_confirmation { 'password' }
+    remember_digest { '' }
+  end
 end
